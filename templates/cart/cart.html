@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+
+<div class="row" style="margin-top: 90px;">
+        <!-- List of items-->
+        <section class="col-lg-8">
+          <div class="d-flex justify-content-between align-items-center pt-3 pb-2 pb-sm-5 mt-1">
+            <h2 class="mb-0">Products:</h2>
+            <a class="btn btn-outline-dark btn-lg pl-2" href="/">Continue shopping</a>
+          </div>
+          <!-- Item-->
+          {% if cart_content %}
+          {% for item in cart_content %}
+
+          <div class="d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
+            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="{{ item.product.product_primary_image.url }}" alt="Product" width="100%"></a>
+              <div class="media-body pt-2">
+                <h3 class="product-title font-size-base mb-2"><a href="shop-single-v1.html" style="text-decoration: none;color: black;">{{ item.product.product_title }}</a></h3>
+                <h5 class="h6" style="width: 400px;">{{ item.product.product_description }}</h5>
+                <div class="font-size-lg text-accent pt-2">Rs.{{ item.product.product_price }}</div>
+              </div>
+            </div>
+            <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 9rem;">
+              <div class="form-group mb-0">
+                <label class="font-weight-medium" for="quantity1">Quantity</label>
+                <input class="form-control" type="number" id="quantity1" value="{{ item.qty }}" onchange="changeQuantity('{{ item.id }}',this)" min="1">
+              </div>
+              <a class="btn btn-danger mt-2" href="/cart/remove-product/{{ item.product.id }}">Remove</a>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- Item-->
+          {% else %}
+
+          <h3>No Products in cart</h3>
+          {% endif %}
+        </section>
+        <!-- Sidebar-->
+        <aside class="col-lg-4 pt-4 pt-lg-0">
+          <div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto">
+            <div class="text-center mb-4 pb-3 border-bottom">
+              <h2 class="h6 mb-3 pb-1">Subtotal</h2>
+              <h3 class="font-weight-normal" id="total-amount">Rs.{{ total_amount }}</h3>
+            </div>
+            <div class="form-group mb-4">
+              <label class="mb-3" for="order-comments"><span class="badge badge-info font-size-xs mr-2">Note</span><span class="font-weight-medium">Additional comments</span></label>
+              <textarea class="form-control" rows="6" id="order-comments"></textarea>
+            </div>
+            <a class="btn btn-outline-dark btn-lg btn-shadow btn-block mt-4" href="/payments/payment-page">Proceed to Checkout</a>
+          </div>
+        </aside>
+      </div>
+
+</div>
+{% endblock %}

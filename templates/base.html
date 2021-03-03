@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	{% block head %}
+	<title>Shoppera</title>
+	{% endblock %}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static '/css/main.css' %}">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/" style="color: #ffc107;">Shoppera</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% for category in categories %}
+            <li><a class="dropdown-item" href="#">{{ category.category_name }}</a></li>
+
+            {% endfor %}
+          </ul>
+        </li>
+        {% if request.user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
+        </li>
+        {% endif %}
+        </ul>
+        <a href="/cart/view-cart" class="nav-link" style="color: white;transform: scale(1.5) translate(0px, -2px);">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart2" viewBox="0 0 16 16">
+          <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+        </svg>
+        </a>
+        {% if user.is_authenticated %}
+        
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="text-decoration: none; color: white; font-size: 1.1rem;">
+            {{ user.username|title }}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            
+            <li><a class="dropdown-item" href="/user-profile/{{ user.id }}">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a href="/logout-user" class="dropdown-item" style="">Logout</a></li>
+            
+          </ul>
+          </div>
+        {% else %}
+          <a href="/login" style="color: white;text-decoration: none;margin-right: 10px;">Login</a>/
+          <a href="/register" style="text-decoration: none;color: white;margin-right: 10px;">Register</a>
+        {% endif %}
+      <form class="d-flex" action="/search-product" method="GET">
+        <input id="search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{% block search-query %}{% endblock %}">
+        <button class="btn btn-outline-warning" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->
+
+
+{% block body %}
+
+{% endblock %}.
+
+<section id="footer" >
+    <div class="footerContainer container">
+
+        <div class="row">
+
+                <!--lc-->
+                <div class="col-xl-3 col-lg-3">
+                    <div class="footerlc">
+                        <div class="footerlogo">
+                            Shoppera<span id="special">.</span>
+                        </div>
+                        <div class="footerlogodet">
+                            <ul type="none">
+                                <li>Address: 123, the address will come here</li>
+                                <li>Phone:+91 XXXXXXXXXX</li>
+                                <li>Email:xxxxxx@gmailcom</li>
+                            </ul>
+                            <div class="footer-social">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+                <!--lc-->
+
+                <!--lm-->
+                <div class="col-xl-2 col-lg-2">
+                    <div class="footerlm">
+                        <div class="footerinfo">
+                            Information
+                        </div>
+                        <div class="footerinfodet">
+                            <ul type="none">
+                                <li>About</li>
+                                <li>Checkout</li>
+                                <li>Contact</li>
+                                <li>Services</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 <!--lm-->
+            
+                 <!--rm-->
+                 <div class="col-xl-2 col-lg-2">
+                     <div class="footerrm">
+                         <div class="footeracc">
+                            My Account
+                         </div>
+                         <div class="footeraccdet">
+                             <ul type="none">
+                                 <li>My Account</li>
+                                 <li>Contact</li>
+                                 <li>Shopping Cart</li>
+                                 <li>Shop</li>
+                             </ul>
+                         </div>
+                     </div>
+                 </div>                 
+                 <!--rm-->
+
+                 <!--rc-->
+                 <div class="col-xl-4 col-lg-4">
+                    <div class="footerform">
+                        <div class="footerformhead">Join Our Newsletter Now</div>
+                        
+                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <form class="footersubmitform">
+                            <input type="text" placeholder="Enter Your Mail">
+                            <button type="button">Subscribe</button>
+                        </form>
+                    </div>
+                 </div>                 
+                 <!--rc-->
+        </div>
+    </div>
+
+    <div class="footerbottom">
+        <div class="display-6">Copyright ©2020 All rights reserved</div>
+    </div>
+</section>
+
+<script type="text/javascript" src="{% static '/js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container prdct bor-r-5" style="margin-top: 100px;">  
+  <div class="row">
+      <div class="col-sm-12 col-lg-6 prdct-img row">
+        <div class="col-xs-12 col-sm-9 order-1 order-sm-2">
+          <img src="{{ product.product_primary_image.url }}" style="width: inherit;" id="lg-prdct-img" class="bor-r-5">
+        </div>
+      </div>
+      <div class="col-sm-12 col-lg-6 prdct-details">
+        <ul class="ul_list" style="list-style: none;">
+        <li>  
+          <h1>{{ product.product_title }}</h1>
+        </li>
+        <li>
+          <h2>{{ product.product_description }}</h2>
+        </li>
+        <li>
+          <h4 style="display: inline-block;">{{ product.product_price }}</h4><span style="text-decoration: line-through; margin-left: 15px">{{ product.product_mrp }}</span>
+        </li>
+        
+        <li>
+          <a href="/cart/add-product/{{ product.id }}" class="btn btn-secondary btn-lg prdct-btn">Add to cart</a>
+        </li>
+        </ul>
+      </div>
+  </div>
+</div>
+
+<!-- Product -->
+
+
+
+{% endblock %}

@@ -1,0 +1,16 @@
+#header{
+	background-color: #212529;
+}
+
+
+.module h2, .module caption, .inline-group h2{
+	background: #212529;
+}
+
+div.breadcrumbs {
+	background: #706c61;
+}
+
+.button, input[type=submit], input[type=button], .submit-row input, a.button{
+	background: #212529;
+}

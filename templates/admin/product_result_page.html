@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block search-query %}
+{{ search_query }}
+{% endblock %}
+
+
+{% block body %}
+<div class="row" style="margin-top: 90px;" id="product-container">
+	<div class="col-4" style="text-align: center; display: none;" id="product-element">
+		
+		<img src="" width="50%" class="product-image">
+
+		<h3 class="product-title"></h3> 
+		<h5 class="product-price"></h5>
+
+		<a href="/products/buy-this/" class="btn btn-secondary product-buy">Buy Now</a>
+		<hr>
+	</div>
+</div>
+
+<!-- <script type="text/javascript" src="{% static 'js/product_search.js' %}"></script> -->
+{% endblock %}
