@@ -16,9 +16,9 @@
           {% for item in cart_content %}
 
           <div class="d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
-            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="{{ item.product.product_primary_image.url }}" alt="Product" width="100%"></a>
+            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" href="{% url 'buy_this' item.product.id %}" style="width: 10rem;"><img src="{{ item.product.product_primary_image.url }}" alt="Product" width="100%"></a>
               <div class="media-body pt-2">
-                <h3 class="product-title font-size-base mb-2"><a href="shop-single-v1.html" style="text-decoration: none;color: black;">{{ item.product.product_title }}</a></h3>
+                <h3 class="product-title font-size-base mb-2"><a href="{% url 'buy_this' item.product.id %}" style="text-decoration: none;color: black;">{{ item.product.product_title }}</a></h3>
                 <h5 class="h6" style="width: 400px;">{{ item.product.product_description }}</h5>
                 <div class="font-size-lg text-accent pt-2">Rs.{{ item.product.product_price }}</div>
               </div>

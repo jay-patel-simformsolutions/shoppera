@@ -13,7 +13,6 @@ from django.db.models import Q
 from .serializers import ProductSerializer
 
 
-
 # Create your views here.
 
 
@@ -98,11 +97,9 @@ def user_profile(request,pk):
 			user = user_form.save()
 			user.set_password(user.password)
 			user.save()
-
 			profile = user_profile_form.save(commit=False)
 			profile.user = user
 			profile.save()
-
 			return redirect('/login')
 		else:
 			print(user_form.errors,user_profile_form.errors)
