@@ -11,8 +11,12 @@ from administration.models import UserProfile
 from cart.models import Cart
 from django.db.models import Q
 from .serializers import ProductSerializer
+from rest_framework.generics import ListAPIView
+from rest_framework.pagination import PageNumberPagination, LimitOffsetPagination
+from rest_framework.filters import SearchFilter
+import django_filters
 
-
+# from django.db.models import model_to_dict
 # Create your views here.
 
 
@@ -108,8 +112,15 @@ def user_profile(request,pk):
 
 def search_product(request):
 	search_query = request.GET['search']
+	products = Product.objects.filter(Q(product_title__contains=search_query) | Q(product_description__contains=search_query))
 	context = {}
 	context['search_query'] = search_query
+	context['products'] = products
+	request.session['products'] = list(products.values())
+	x = lambda x : x[0]
+	colors = list(map(str,map(x,products.values_list('product_color').distinct())))
+	# print(list(colors))
+	context['colors'] = list(colors)
 	return render(request,'admin/product_result_page.html',context)
 
 
@@ -119,3 +130,21 @@ def api_test(request):
 	products = Product.objects.filter(Q(product_title__contains=search_query) | Q(product_description__contains=search_query))
 	serializer = ProductSerializer(products,many=True)
 	return Response(serializer.data)
+
+
+class CustomPagination(PageNumberPagination):
+	# default_limit = 5
+	# max_limit = 2
+	page_size = 3
+
+
+class ProductsApi(ListAPIView):
+	serializer_class = ProductSerializer
+	# queryset = Product.objects.all()
+	pagination_class = CustomPagination
+	filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+	search_fields = ['product_title','product_description']
+	filterset_fields = ['product_color','product_price']
+
+	def get_queryset(self):
+		return Product.objects.all()

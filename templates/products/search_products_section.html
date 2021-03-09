@@ -1,0 +1,12 @@
+{% for product in products %}
+<div class="col-4" style="text-align: center;" id="product-element">
+
+	<img src="media/{{ product.product_primary_image }}" width="50%" class="product-image">
+
+	<h3 class="product-title">{{ product.product_title }}</h3> 
+	<h5 class="product-price">{{ product.product_price }}</h5>
+
+	<a class="btn btn-secondary product-buy" href="{% url 'buy_this' product.id %}">Buy Now</a>
+	<hr>
+</div>
+{% endfor %}

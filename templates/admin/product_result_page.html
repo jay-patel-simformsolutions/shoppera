@@ -7,45 +7,30 @@
 
 {% block body %}
 <div class="row" style="margin-top: 90px;" id="product-container">
-	<div class="col-4" style="text-align: center; display: none;" id="product-element">
-		
-		<img src="" width="50%" class="product-image">
+  <div class="col-3">
+    <form style="padding: 0 50px;" id="filter-form">
+      <h1>Filters</h1>
+      {% csrf_token %}
+      <label for="price-from" class="form-label">Price from: <span id="from"></span></label>
+      <input type="range" class="form-range" min="0" max="10000" value="0" step="500" id="price-from" name="price-from">
 
-		<h3 class="product-title"></h3> 
-		<h5 class="product-price"></h5>
+      <label for="price-to" class="form-label">Price to: <span id="to"></span></label>
+      <input type="range" class="form-range" min="0" max="10000" value="0" step="500" id="price-to" name="price-to">
 
-		<button class="btn btn-secondary product-buy">Buy Now</button>
-		<hr>
-	</div>
-</div>
-<div class="container prdct bor-r-5" style="margin-top: 100px; display: none;" id="product-data-element">  
-  <div class="row">
-      <div class="col-sm-12 col-lg-6 prdct-img row">
-        <div class="col-sm-3">
-          <i class="mdi mdi-arrow-left-thick" style="font-size: 45px; color: #ccc;" id="back-arrow"></i>
-        </div>
-        <div class="col-xs-12 col-sm-9 order-1 order-sm-2">
-          <img src="" style="width: inherit;" id="lg-prdct-img" class="bor-r-5">
-        </div>
-      </div>
-      <div class="col-sm-12 col-lg-6 prdct-details">
-        <ul class="ul_list" style="list-style: none;">
-        <li>  
-          <h1 id="product-data-title"></h1>
-        </li>
-        <li>
-          <h2 id="product-data-description"></h2>
-        </li>
-        <li>
-          <h4 style="display: inline-block;" id="product-data-price"></h4><span style="text-decoration: line-through; margin-left: 15px" id="product-data-mrp"></span>
-        </li>
-        
-        <li>
-          <a href="/cart/add-product/" class="btn btn-secondary btn-lg prdct-btn" id="product-data-button">Add to cart</a>
-        </li>
-        </ul>
-      </div>
+      <label for="color-select" class="form-label">Color:</label>
+      <select class="form-select" aria-label="Default select example" id="color-select">
+        {% for color in colors %}
+          <option value="{{ color }}">{{ color }}</option>
+        {% endfor %}
+      </select>
+
+      <button class="btn btn-success" type="button" id="filter-button">Apply Filter</button>
+    </form>
+  </div>
+  <div class="col-9 row" id="products-section">
+    {% include 'products/search_products_section.html' %}
   </div>
 </div>
-<script type="text/javascript" src="{% static 'js/product_search.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/price_range.js' %}"></script>
+
 {% endblock %}

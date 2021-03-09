@@ -23,3 +23,17 @@ def product_data(request, pk):
 	product = Product.objects.get(id=pk)
 	serializer = ProductSerializer(product)
 	return Response(serializer.data)
+
+
+@api_view(['GET'])
+def filter_products(request):
+	price_from = request.GET['price_from']
+	price_to = request.GET['price_to']
+	color = request.GET['color']
+	products = request.session['products']
+	data = []
+	for product in products:
+		if product['product_price'] >= int(price_from) and product['product_price'] <= int(price_to) and product['product_color'] == color:
+			data.append(product)
+	html_products = render(request,'products/search_products_section.html',{'products' : data})
+	return render(request,'products/search_products_section.html', {'products' : data})

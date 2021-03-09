@@ -10,6 +10,7 @@ urlpatterns = [
 	path('user-profile/<int:pk>',views.user_profile),
 	path('search-product',views.search_product),
 	path('api-test',views.api_test),
+	path('abc',views.ProductsApi.as_view()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,

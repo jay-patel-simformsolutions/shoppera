@@ -17,12 +17,13 @@ class Category(models.Model):
 
 class Product(models.Model):
 	"""model of Products"""
-	category = models.ForeignKey(Category,on_delete=models.CASCADE)
+	category = models.ForeignKey(Category, on_delete=models.CASCADE)
 	product_title = models.CharField(max_length=35)
 	product_description = models.CharField(max_length=150)
 	product_price = models.IntegerField()
 	product_mrp = models.IntegerField()
 	product_primary_image = models.ImageField()
+	product_color = models.CharField(max_length=150)
 
 	def __str__(self):
 		return self.product_title
@@ -33,7 +34,7 @@ class Product(models.Model):
 
 class ProductImages(models.Model):
 	"""docstring for ProductImages"""
-	product = models.ForeignKey(Product,on_delete=models.CASCADE)
+	product = models.ForeignKey(Product, on_delete=models.CASCADE)
 	product_secondary_images = models.ImageField()
 
 	def __str__(self):
