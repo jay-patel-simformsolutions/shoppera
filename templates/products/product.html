@@ -2,35 +2,38 @@
 {% load static %}
 {% block body %}
 
-<div class="container prdct bor-r-5" style="margin-top: 100px;" id="product-data-element">  
+<div class="container prdct bor-r-5" style="margin-top: 100px;" id="product-data-element">
   <div class="row">
-      <div class="col-sm-12 col-lg-6 prdct-img row">
-        <div class="col-sm-3">
-          <i class="mdi mdi-arrow-left-thick" style="font-size: 45px; color: #ccc;" id="back-arrow"></i>
-        </div>
-        <div class="col-xs-12 col-sm-9 order-1 order-sm-2">
-          <img src="{{ product.product_primary_image.url }}" style="width: inherit;" id="lg-prdct-img" class="bor-r-5">
-        </div>
+    <div class="col-sm-12 col-lg-6 prdct-img row">
+      <div class="col-sm-3">
+        <i class="mdi mdi-arrow-left-thick" style="font-size: 45px; color: #ccc;" id="back-arrow"></i>
       </div>
-      <div class="col-sm-12 col-lg-6 prdct-details">
-        <ul class="ul_list" style="list-style: none;">
-        <li>  
+      <div class="col-xs-12 col-sm-9 order-1 order-sm-2">
+        <img src="{{ product.product_primary_image.url }}" style="width: inherit;" id="lg-prdct-img" class="bor-r-5">
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-6 prdct-details">
+      <ul class="ul_list" style="list-style: none;">
+        <li>
           <h1 id="product-data-title">{{ product.product_title }}</h1>
         </li>
         <li>
           <h2 id="product-data-description">{{ product.product_description }}</h2>
         </li>
         <li>
-          <h4 style="display: inline-block;" id="product-data-price">{{ product.product_price }}</h4><span style="text-decoration: line-through; margin-left: 15px" id="product-data-mrp">{{ product.product_mrp }}</span>
+          <h4 style="display: inline-block;" id="product-data-price">{{ product.product_price }}</h4><span
+            style="text-decoration: line-through; margin-left: 15px" id="product-data-mrp">{{ product.product_mrp
+            }}</span>
         </li>
-        
+
         <li>
-          <a href="{% url 'add_product' product.id %}" class="btn btn-secondary btn-lg prdct-btn" id="product-data-button">Add to cart</a>
+          <a href="{% url 'add_product' product.id %}" class="btn btn-secondary btn-lg prdct-btn"
+            id="product-data-button">Add to cart</a>
         </li>
-        </ul>
-      </div>
+      </ul>
+    </div>
   </div>
-</div> 
+</div>
 <!-- Product -->
 
 <script type="text/javascript" src="{% static 'js/product_search.js' %}"></script>

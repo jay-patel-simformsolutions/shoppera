@@ -24,6 +24,7 @@ class Product(models.Model):
 	product_mrp = models.IntegerField()
 	product_primary_image = models.ImageField()
 	product_color = models.CharField(max_length=150)
+	product_trending = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.product_title

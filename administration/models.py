@@ -6,19 +6,23 @@ from django.core.validators import MaxLengthValidator, MinLengthValidator
 
 
 def phone_validator(value):
-	if len(str(value)) == 10:
-		pass
-	else:
-		raise ValidationError('Phone Number sholud be of 10 digits')
+    if len(str(value)) == 10:
+        pass
+    else:
+        raise ValidationError('Phone Number sholud be of 10 digits')
 
 
 class UserProfile(models.Model):
 
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	phone = models.BigIntegerField(validators=[phone_validator])
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.BigIntegerField(validators=[phone_validator])
 
-	def __str__(self):
-		return self.user.username
+    def __str__(self):
+        return self.user.username
 
-	class Meta:
-		db_table = 'user_profile'
+    class Meta:
+        db_table = 'user_profile'
+
+
+class Carousel(models.Model):
+    image = models.ImageField()
