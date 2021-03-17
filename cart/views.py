@@ -63,3 +63,5 @@ def change_quantity(request):
 	response = {}
 	response['t_amount'] = cart_content.cart.t_amount
 	return HttpResponse(json.dumps(response), content_type="application/json")
+
+

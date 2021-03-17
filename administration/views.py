@@ -21,7 +21,6 @@ from cart.models import Cart
 from .serializers import ProductSerializer
 from products.models import Product, Category
 
-# from django.db.models import model_to_dict
 # Create your views here.
 
 

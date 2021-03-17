@@ -3,6 +3,7 @@ from .serializers import ProductSerializer
 from products.models import Product
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework.generics import ListCreateAPIView, RetrieveAPIView
 
 # Create your views here.
 
@@ -37,3 +38,8 @@ def filter_products(request):
 			data.append(product)
 	html_products = render(request,'products/search_products_section.html',{'products' : data})
 	return render(request,'products/search_products_section.html', {'products' : data})
+
+
+class ProductPractice(RetrieveAPIView):
+	serializer_class = ProductSerializer
+	queryset = Product.objects.all()
